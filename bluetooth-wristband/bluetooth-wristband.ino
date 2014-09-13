@@ -1,10 +1,10 @@
 #include <RFduinoBLE.h>
-#define DATA 2
+#define ACTION 2
 #define CONNECT 3
 #define DISCONNECT 4
 
 void setup() {
-  pinMode(DATA , OUTPUT);   
+  pinMode(ACTION , OUTPUT);   
   pinMode(DISCONNECT, OUTPUT);
   pinMode(CONNECT, OUTPUT);
   
@@ -19,9 +19,15 @@ void loop() {
 
 void RFduinoBLE_onReceive(char *data, int len){
   uint8_t command = data[0];
-  
-  if(command = 0x01) {
-    digitalWrite(DATA, HIGH); delay(500); digitalWrite(DATA, LOW);
+  // echo command for debugging
+  RFduinoBLE.sendByte(command);
+
+  if(command == 0x01) {
+    digitalWrite(ACTION, HIGH); delay(500); digitalWrite(ACTION, LOW);
+  } else if(command == 0xFF) {
+    digitalWrite(ACTION, HIGH);
+  } else if(command == 0x00) {
+    digitalWrite(ACTION, LOW);
   }
 }
 
@@ -30,9 +36,9 @@ void RFduinoBLE_onReceive(char *data, int len){
 * for debugging
 ************************/
 void RFduinoBLE_onConnect() {
-  digitalWrite(DATA, HIGH);
+  digitalWrite(CONNECT, HIGH);
   delay(1000);
-  digitalWrite(DATA, LOW);
+  digitalWrite(CONNECT, LOW);
 }
 void RFduinoBLE_onDisconnect(){
   digitalWrite(DISCONNECT, HIGH);
