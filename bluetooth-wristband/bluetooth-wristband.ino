@@ -5,6 +5,7 @@
 
 void setup() {
   pinMode(ACTION , OUTPUT);   
+  digitalWrite(ACTION, HIGH); // low-active
   pinMode(DISCONNECT, OUTPUT);
   pinMode(CONNECT, OUTPUT);
   
@@ -23,11 +24,11 @@ void RFduinoBLE_onReceive(char *data, int len){
   RFduinoBLE.sendByte(command);
 
   if(command == 0x01) {
-    digitalWrite(ACTION, HIGH); delay(500); digitalWrite(ACTION, LOW);
+    digitalWrite(ACTION, LOW); delay(500); digitalWrite(ACTION, HIGH);
   } else if(command == 0xFF) {
-    digitalWrite(ACTION, HIGH);
-  } else if(command == 0x00) {
     digitalWrite(ACTION, LOW);
+  } else if(command == 0x00) {
+    digitalWrite(ACTION, HIGH);
   }
 }
 
