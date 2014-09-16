@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-
-import json, urllib.request, pycouchdb
+import json, urllib.request, pycouchdb, argparse
 
 tag = 'man_made=surveillance'
 couchdb_server = '127.0.0.1:5984'
@@ -9,7 +8,13 @@ couchdb_db = 'cctv1'
 couchdb_user = 'test'
 couchdb_password = 'musterPW'
 
-query = '[out:json];node[' + tag + '];out;'
+arg = argparse.ArgumentParser()
+arg.add_argument('couchdb', help='The CouchDB-Installation you wan\'t to use in the form user:passwort@server:port')
+arg.add_argument('database', help='The CouchDB-Database you wan\'t to use')
+arg.add_argument('tag', help='The OpenStreetMap tag which you wan\'t to use to get the data')
+arg.parse_args()
+
+query = '[out:json];node[' + arg.tag + '];out;'
 print('Try to get the data for',tag,'from OpenStreetMap')
 
 req = urllib.request.Request(url='http://overpass.osm.rambler.ru/cgi/interpreter', data=query.encode(encoding='utf-8'))
@@ -20,13 +25,11 @@ if resp.status == 200:
 	data = resp.read().decode('utf-8')
 	data = json.loads(data)
 
-	server = pycouchdb.Server('http://' + couchdb_user + ':' + couchdb_password + '@' + couchdb_server)
-	db = server.database(couchdb_db)
+	server = pycouchdb.Server('http://' + arg.couchdb)
+	db = server.database(arg.database)
 	for element in data['elements']:
 		doc = dict(lon = element['lon'], lat = element['lat'])
 		db_resp = db.save(doc)
-#		db_resp = resp.decode('utf-8')
-#		db_resp = json.loads(resp)
 		print('Created document:',db_resp['_id'])
 
 else:
