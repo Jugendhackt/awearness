@@ -9,7 +9,7 @@ void setup() {
   pinMode(DISCONNECT, OUTPUT);
   pinMode(CONNECT, OUTPUT);
   
-  RFduinoBLE.deviceName = "awearable";
+  RFduinoBLE.deviceName = "awearness";
   RFduinoBLE.begin();  
 }
 
