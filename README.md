@@ -7,4 +7,4 @@ Inside the wristband is a [RFduino](http://rfduino.com) which listens for certai
 This is how the vibration motor or a LED is triggered. 
 
 The example application triggers the wristband when a surveillance camera is nearby. The data comes from a
-self-written API that gets its data from Open Street Map. (Sadly not yet in this repo).
+[self-written API](./api) that gets its data from Open Street Map.
