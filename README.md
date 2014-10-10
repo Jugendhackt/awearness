@@ -2,9 +2,10 @@
 vibrating wristbands are awesome
 
 ## Details please!
-awearness is a [3d-printed](./design) wristband that vibrates when it is triggered by the app running on the smartphone that is connected via Bluetooth Low Energy.
-Inside the wristband is a [RFduino](http://rfduino.com) which listens for certain [commands](./docs/RFduino_wristband/wristband_commands.md).
-This is how the vibration motor or a LED is triggered. 
+awearness is an ultra expandable notification concept whose advantages lie in its simplicity and versatility.
 
-The example application triggers the wristband when a surveillance camera is nearby. The data comes from a
-[self-written API](./api) that gets its data from Open Street Map.
+We're aiming at developing a wristband that reminds you of things you want to be reminded of. Our first prototyping lead to a [3D-Printed](./design) casing with basic electronics in it. Those electronics include an [RFduino](http://rfduino.com), connecting to any device you wish and waiting for [commands](./docs/RFduino_wristband/wristband_commands.md) to execute.
+
+The first application we developed signals to the wristband when there is a surveillance camera nearby which then vibrates.
+We extracted the needed date from Open Street Map, using a [self-written API](./api) Of course it could be sent a signal whenever you like, for example when reaching an accident hotspot while you are going by car or bike. Maybe you want to be reminded of the next place worth seeing, or whenever there is a book store in sight. You decide. 
+
