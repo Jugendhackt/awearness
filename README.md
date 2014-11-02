@@ -1,4 +1,4 @@
-# awearness
+# awearness moved to [its own place](https://github.com/awearness)
 vibrating wristbands are awesome
 
 ## Details please!
